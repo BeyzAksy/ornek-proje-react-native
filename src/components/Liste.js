@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 import axios from 'axios';
+
+import Detay from './Detay';
+
 
 class Liste extends Component {
   state = { data: [] };
@@ -14,16 +17,17 @@ class Liste extends Component {
   }
 
   renderData() {
-    return this.state.data.map(responseData =>
-    <Text> {responseData.title} </Text>
+    return this.state.data.map((responseData, Id) =>   //gelen datalarda uniq bir key olmasını istiyotdu
+    <Detay key={Id} data={responseData} />   //bunu data içinden de belirleyebiliriz kendimizde bu şekilde id atayabiliriz
   );
   }
+
   render() {
     console.log('gelen data:' + this.state);
     return (
-      <View style={{ marginTop: 5 }}>
+      <ScrollView style={{ marginTop: 5 }}>
         {this.renderData()}
-      </View>
+      </ScrollView>
     );
   }
 }
